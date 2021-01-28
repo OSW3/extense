@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./src/Core/Extense');
+module.exports = require('./src/ExtenseFramework');
