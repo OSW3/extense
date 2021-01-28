@@ -1,0 +1,19 @@
+{
+  "name": "extense",
+  "version": "1.0.0",
+  "description": "Browser Extension Framework",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OSW3/extense.git"
+  },
+  "author": "OSW3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OSW3/extense/issues"
+  },
+  "homepage": "https://github.com/OSW3/extense#readme"
+}
