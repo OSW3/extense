@@ -1,6 +1,6 @@
 {
   "name": "extense",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Browser Extension Framework",
   "main": "src/index.js",
   "scripts": {
