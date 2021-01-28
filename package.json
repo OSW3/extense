@@ -4,7 +4,8 @@
   "description": "Browser Extension Framework",
   "main": "extense.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "webpack --watch",
+    "dev": "webpack"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/OSW3/extense/issues"
   },
-  "homepage": "https://github.com/OSW3/extense#readme"
+  "homepage": "https://github.com/OSW3/extense#readme",
+  "devDependencies": {
+    "webpack": "^5.18.0"
+  }
 }
