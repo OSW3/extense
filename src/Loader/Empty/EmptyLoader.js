@@ -54,7 +54,7 @@ module.exports = class EmptyLoader
         return Object.assign(BASE_CONFIG, {
             entry: ENTRY_FILE,
             output: {
-                path: this.kernel.dist_dir,
+                path: path.resolve(this.kernel.project_dir, '/dist/'),
                 filename: OUTPUT_FILE,
             },
             plugins: BASE_CONFIG.plugins.concat([
