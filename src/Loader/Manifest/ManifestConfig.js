@@ -16,6 +16,7 @@
 // Imports
 
 const yaml = require('yaml-reader');
+const path = require("path");
 
 
 /******************************************************************************/
@@ -63,7 +64,9 @@ module.exports = class ManifestConfig
         this.source = `${kernel.project_dir}${SOURCE}`;
 
         // Build the absolute path of the manifest json
-        this.output = `${kernel.project_dir}${OUTPUT}`;
+        // this.output = `${kernel.project_dir}${OUTPUT}`;
+        this.output = path.resolve(kernel.project_dir, OUTPUT);
+        // __output: '/Users/arnaud/Developer/# Netlab/NPM Modules/extense/test/dist/manifest.json'
 
         // Read the manifest data of the YML source
         this.config = yaml.read( this.source );
