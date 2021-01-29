@@ -2,10 +2,11 @@
   "name": "extense",
   "version": "1.0.3",
   "description": "Browser Extension Framework",
-  "main": "extense.js",
+  "main": "index.js",
   "scripts": {
     "watch": "webpack --watch",
-    "dev": "webpack"
+    "dev": "webpack",
+    "test": "node ./test/test.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,9 @@
   },
   "homepage": "https://github.com/OSW3/extense#readme",
   "devDependencies": {
-    "webpack": "^5.18.0"
+    "generate-json-webpack-plugin": "^2.0.0",
+    "webpack": "^5.18.0",
+    "webpack-cli": "^4.4.0",
+    "yaml-reader": "^1.0.3"
   }
 }

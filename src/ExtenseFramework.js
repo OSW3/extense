@@ -1,9 +1,8 @@
 'use strict';
 
-module.exports = class ExtenseFramework
+const Kernel = require('./Kernel');
+const ManifestLoader = require('./Loader/Manifest/ManifestLoader');
+
+module.exports = class ExtenseFramework extends Kernel
 {
-    constructor()
-    {
-        console.log('This is the Extense Test');
-    }
 }
