@@ -70,7 +70,7 @@ module.exports = class ManifestLoader extends ManifestConfig
                     this.getData(),
                 )
             ]),
-            // __dump: this.getData(),
+            __dump: this.getData(),
         });
     }
 

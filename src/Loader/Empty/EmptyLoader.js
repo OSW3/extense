@@ -15,6 +15,7 @@
 /******************************************************************************/
 // Imports
 
+const path = require("path");
 const RemovePlugin = require('remove-files-webpack-plugin');
 
 
@@ -28,7 +29,9 @@ const RemovePlugin = require('remove-files-webpack-plugin');
 const BASE_CONFIG = require('../../Config/webpack.config');
 
 
-const ENTRY_FILE = '../../Resources/empty/empty';
+
+const ENTRY_FILE = path.resolve(__dirname, '../../Resources/empty/empty');
+// const ENTRY_FILE = '../../Resources/empty/empty';
 const OUTPUT_FILE = "empty";
 
 
