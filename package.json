@@ -6,7 +6,8 @@
   "scripts": {
     "watch": "webpack --watch",
     "dev": "webpack",
-    "test": "node ./test/test.js"
+    "test": "node ./test/test.js",
+    "create": "node ./src/Create.js"
   },
   "repository": {
     "type": "git",
