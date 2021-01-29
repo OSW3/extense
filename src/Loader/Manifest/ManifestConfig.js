@@ -28,7 +28,8 @@ const path = require("path");
 const SOURCE = '/src/config/manifest.yml';
 
 // The JSON output of the manifest
-const OUTPUT = '/dist/manifest.json';
+// const OUTPUT = '/dist/manifest.json';
+const OUTPUT = '/manifest.json';
 
 
 /******************************************************************************/

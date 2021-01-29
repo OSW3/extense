@@ -59,19 +59,5 @@ module.exports = class EmptyLoader
                 new RemovePlugin({after:{include:[ `${this.kernel.dist_dir}/${OUTPUT_FILE}` ]}}),
             ])
         });
-
-
-
-// module.exports = Object.assign({}, config, {
-//     entry: entryFile,
-//     output: {
-//         path: outputPath,
-//         filename: outputFile,
-//     },
-
-//     plugins: [
-//         new RemovePlugin({after:{include:[ `${outputPath}/${outputFile}` ]}}),
-//     ]
-// });
     }
 }

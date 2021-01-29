@@ -17,6 +17,8 @@
 
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 
+const EmptyLoader = require('../Empty/EmptyLoader');
+
 const ManifestVersion = require('./Properties/ManifestVersion');
 const ManifestConfig = require('./ManifestConfig');
 const ExtensionName = require('./Properties/ExtensionName');
@@ -26,7 +28,10 @@ const ExtensionVersion = require('./Properties/ExtensionVersion');
 const ExtensionAuthor = require('./Properties/ExtensionAuthor');
 const ExtensionUrl = require('./Properties/ExtensionUrl');
 const LocalesDefault = require('./Properties/LocalesDefault');
-const EmptyLoader = require('../Empty/EmptyLoader');
+const UiIcons = require('./Properties/UiIcons');
+const PermissionsDefault = require('./Properties/PermissionsDefault');
+const PermissionsOptional = require('./Properties/PermissionsOptional');
+const Background = require('./Properties/Background');
 
 
 /******************************************************************************/
@@ -56,6 +61,10 @@ module.exports = class ManifestLoader extends ManifestConfig
         new ExtensionAuthor( this.kernel ),
         new ExtensionUrl( this.kernel ),
         new LocalesDefault( this.kernel ),
+        new UiIcons( this.kernel ),
+        new PermissionsDefault( this.kernel ),
+        new PermissionsOptional( this.kernel ),
+        new Background( this.kernel ),
     ];
 
     getConfig()
@@ -70,14 +79,14 @@ module.exports = class ManifestLoader extends ManifestConfig
                     this.getData(),
                 )
             ]),
-            __dump: this.getData(),
-            __output: this.output, 
+            // __dump: this.getData(),
         });
     }
 
     getData()
     {
         this.properties.forEach(property => {
+            // console.log( property.getProperty() );
             this.manifest = Object.assign(this.manifest, property.getProperty()) ;
         });
 
