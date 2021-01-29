@@ -39,6 +39,8 @@ module.exports = class ManifestConfig
 {
     kernel;
 
+    config;
+
     /**
      * The absolute path of the YAML manifest source
      * 

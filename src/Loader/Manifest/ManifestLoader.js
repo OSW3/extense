@@ -26,6 +26,7 @@ const ExtensionVersion = require('./Properties/ExtensionVersion');
 const ExtensionAuthor = require('./Properties/ExtensionAuthor');
 const ExtensionUrl = require('./Properties/ExtensionUrl');
 const LocalesDefault = require('./Properties/LocalesDefault');
+const EmptyLoader = require('../Empty/EmptyLoader');
 
 
 /******************************************************************************/
@@ -34,7 +35,7 @@ const LocalesDefault = require('./Properties/LocalesDefault');
 // Consts
 
 const LOADER_ID = 'manifest';
-const BASE_CONFIG = require('../../Config/webpack.config');
+// const BASE_CONFIG = require('../../Config/webpack.config');
 
 
 /******************************************************************************/
@@ -59,15 +60,17 @@ module.exports = class ManifestLoader extends ManifestConfig
 
     getConfig()
     {
-        return Object.assign(BASE_CONFIG, {
+        let config = new EmptyLoader( this.kernel ).getConfig()
+
+        return Object.assign(config, {
             name: LOADER_ID,
-            plugins: BASE_CONFIG.plugins.concat([
+            plugins: config.plugins.concat([
                 new GenerateJsonPlugin(
                     this.output, 
                     this.getData(),
                 )
             ]),
-            __dump: this.getData(),
+            // __dump: this.getData(),
         });
     }
 
