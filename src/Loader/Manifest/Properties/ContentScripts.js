@@ -17,12 +17,12 @@
 // Imports
 
 const ManifestConfig = require('../ManifestConfig');
-const ContentScriptsFrames = require('./ContentScriptsFrames');
-const ContentScriptsGlobs = require('./ContentScriptsGlobs');
-const ContentScriptsMatches = require('./ContentScriptsMatches');
-const ContentScriptsRunTime = require('./ContentScriptsRunTime');
-const ContentScriptsScripts = require('./ContentScriptsScripts');
-const ContentScriptsStylecheets = require('./ContentScriptsStylecheets');
+const Frames = require('./ContentScripts/Frames');
+const Globs = require('./ContentScripts/Globs');
+const Matches = require('./ContentScripts/Matches');
+const RunTime = require('./ContentScripts/RunTime');
+const Scripts = require('./ContentScripts/Scripts');
+const Stylecheets = require('./ContentScripts/Stylecheets');
 
 
 /******************************************************************************/
@@ -47,12 +47,12 @@ module.exports = class ContentScripts extends ManifestConfig
     {
         if (null != this.config.app && null != this.config.app.content)
         {
-            this.properties.push( new ContentScriptsScripts( this.kernel ) );
-            this.properties.push( new ContentScriptsStylecheets( this.kernel ) );
-            this.properties.push( new ContentScriptsFrames( this.kernel ) );
-            this.properties.push( new ContentScriptsRunTime( this.kernel ) );
-            this.properties.push( new ContentScriptsMatches( this.kernel ) );
-            this.properties.push( new ContentScriptsGlobs( this.kernel ) );
+            this.properties.push( new Scripts( this.kernel ) );
+            this.properties.push( new Stylecheets( this.kernel ) );
+            this.properties.push( new Frames( this.kernel ) );
+            this.properties.push( new RunTime( this.kernel ) );
+            this.properties.push( new Matches( this.kernel ) );
+            this.properties.push( new Globs( this.kernel ) );
 
             this.getData();
 

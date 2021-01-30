@@ -1,7 +1,7 @@
 /**
- * icons Property
+ * browser_action.default_popup Property
  * --
- * Generate the "icons" property of manifest.json
+ * Generate the "browser_action.default_popup" property of manifest.json
  * 
  * @version 1.0
  * @since 1.0
@@ -15,7 +15,7 @@
 /******************************************************************************/
 // Imports
 
-const ManifestConfig = require('../ManifestConfig');
+const ManifestConfig = require('../../ManifestConfig');
 
 
 /******************************************************************************/
@@ -23,7 +23,7 @@ const ManifestConfig = require('../ManifestConfig');
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'icons';
+const PROPERTY_ID = 'default_popup';
 
 
 /******************************************************************************/
@@ -31,14 +31,16 @@ const PROPERTY_ID = 'icons';
 /******************************************************************************/
 // Exports
 
-module.exports = class UiIcons extends ManifestConfig
+module.exports = class Popup extends ManifestConfig
 {
     getProperty()
     {
         let value = null;
         
-        if (value = this.config.icons)
+        if (null != this.config.app.browser_action.popup)
         {
+            value = this.config.app.browser_action.popup;
+            
             return {[`${PROPERTY_ID}`]: value};
         }
     }

@@ -1,7 +1,7 @@
 /**
- * browser_action.tooltip Property
+ * background.scripts Property
  * --
- * Generate the "browser_action.tooltip" property of manifest.json
+ * Generate the "background.scripts" property of manifest.json
  * 
  * @version 1.0
  * @since 1.0
@@ -15,7 +15,7 @@
 /******************************************************************************/
 // Imports
 
-const ManifestConfig = require('../ManifestConfig');
+const ManifestConfig = require('../../ManifestConfig');
 
 
 /******************************************************************************/
@@ -23,7 +23,7 @@ const ManifestConfig = require('../ManifestConfig');
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'default_title';
+const PROPERTY_ID = 'css';
 
 
 /******************************************************************************/
@@ -31,15 +31,15 @@ const PROPERTY_ID = 'default_title';
 /******************************************************************************/
 // Exports
 
-module.exports = class BrowserActionTooltip extends ManifestConfig
+module.exports = class Stylecheets extends ManifestConfig
 {
     getProperty()
     {
         let value = null;
         
-        if (null != this.config.app.browser_action.tooltip)
+        if (null != this.config.app.content.stylesheets)
         {
-            value = this.config.app.browser_action.tooltip;
+            value = this.config.app.content.stylesheets;
             
             return {[`${PROPERTY_ID}`]: value};
         }

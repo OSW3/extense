@@ -19,8 +19,9 @@ const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 
 const EmptyLoader = require('../Empty/EmptyLoader');
 
-const ManifestVersion = require('./Properties/ManifestVersion');
 const ManifestConfig = require('./ManifestConfig');
+
+const Manifest_VersionProperty = require('./Properties/Manifest/VersionProperty');
 const ExtensionName = require('./Properties/ExtensionName');
 const ExtensionShortName = require('./Properties/ExtensionShortName');
 const ExtensionDescription = require('./Properties/ExtensionDescription');
@@ -28,10 +29,10 @@ const ExtensionVersion = require('./Properties/ExtensionVersion');
 const ExtensionAuthor = require('./Properties/ExtensionAuthor');
 const ExtensionUrl = require('./Properties/ExtensionUrl');
 const LocalesDefault = require('./Properties/LocalesDefault');
-const UiIcons = require('./Properties/UiIcons');
+const UI_IconsProperty = require('./Properties/UI/IconsProperty');
 const PermissionsDefault = require('./Properties/PermissionsDefault');
 const PermissionsOptional = require('./Properties/PermissionsOptional');
-const Background = require('./Properties/Background');
+const BackgroundScripts = require('./Properties/BackgroundScripts');
 const BrowserAction = require('./Properties/BrowserAction');
 const ContentScripts = require('./Properties/ContentScripts');
 
@@ -55,7 +56,7 @@ module.exports = class ManifestLoader extends ManifestConfig
     manifest = Object.assign({});
 
     properties = [
-        new ManifestVersion( this.kernel ),
+        new Manifest_VersionProperty( this.kernel ),
         new ExtensionName( this.kernel ),
         new ExtensionShortName( this.kernel ),
         new ExtensionDescription( this.kernel ),
@@ -63,10 +64,10 @@ module.exports = class ManifestLoader extends ManifestConfig
         new ExtensionAuthor( this.kernel ),
         new ExtensionUrl( this.kernel ),
         new LocalesDefault( this.kernel ),
-        new UiIcons( this.kernel ),
+        new UI_IconsProperty( this.kernel ),
         new PermissionsDefault( this.kernel ),
         new PermissionsOptional( this.kernel ),
-        new Background( this.kernel ),
+        new BackgroundScripts( this.kernel ),
         new BrowserAction( this.kernel ),
         new ContentScripts( this.kernel ),
     ];
@@ -83,7 +84,7 @@ module.exports = class ManifestLoader extends ManifestConfig
                     this.getData(),
                 )
             ]),
-            __dump: this.getData(),
+            // __dump: this.getData(),
         });
     }
 

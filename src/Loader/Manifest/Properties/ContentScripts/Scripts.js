@@ -1,7 +1,7 @@
 /**
- * Manifest Version
+ * background.scripts Property
  * --
- * Generate the "manifest_version" property of manifest.json
+ * Generate the "background.scripts" property of manifest.json
  * 
  * @version 1.0
  * @since 1.0
@@ -15,7 +15,7 @@
 /******************************************************************************/
 // Imports
 
-const ManifestConfig = require('../ManifestConfig');
+const ManifestConfig = require('../../ManifestConfig');
 
 
 /******************************************************************************/
@@ -23,10 +23,7 @@ const ManifestConfig = require('../ManifestConfig');
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'manifest_version';
-
-const MANIFEST_VERSION_MIN = 2;
-const MANIFEST_VERSION_MAX = 3;
+const PROPERTY_ID = 'js';
 
 
 /******************************************************************************/
@@ -34,22 +31,17 @@ const MANIFEST_VERSION_MAX = 3;
 /******************************************************************************/
 // Exports
 
-module.exports = class ManifestVersion extends ManifestConfig
+module.exports = class Scripts extends ManifestConfig
 {
     getProperty()
     {
         let value = null;
-
-        if (null == (value = this.config.manifest.version))
+        
+        if (null != this.config.app.content.scripts)
         {
-            throw new Error(`The manifest version is required`);
+            value = this.config.app.content.scripts;
+            
+            return {[`${PROPERTY_ID}`]: value};
         }
-
-        if (value < MANIFEST_VERSION_MIN || value > MANIFEST_VERSION_MAX)
-        {
-            throw new Error(`The manifest version must be an integer value between ${MANIFEST_VERSION_MIN} and ${MANIFEST_VERSION_MAX}`);
-        }
-
-        return {[`${PROPERTY_ID}`]: value};
     }
 }

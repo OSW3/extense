@@ -1,7 +1,7 @@
 /**
- * background.scripts Property
+ * icons Property
  * --
- * Generate the "background.scripts" property of manifest.json
+ * Generate the "icons" property of manifest.json
  * 
  * @version 1.0
  * @since 1.0
@@ -15,7 +15,7 @@
 /******************************************************************************/
 // Imports
 
-const ManifestConfig = require('../ManifestConfig');
+const ManifestConfig = require('../../ManifestConfig');
 
 
 /******************************************************************************/
@@ -23,7 +23,7 @@ const ManifestConfig = require('../ManifestConfig');
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'js';
+const PROPERTY_ID = 'icons';
 
 
 /******************************************************************************/
@@ -31,16 +31,14 @@ const PROPERTY_ID = 'js';
 /******************************************************************************/
 // Exports
 
-module.exports = class ContentScriptsScripts extends ManifestConfig
+module.exports = class IconsProperty extends ManifestConfig
 {
     getProperty()
     {
         let value = null;
         
-        if (null != this.config.app.content.scripts)
+        if (value = this.config.icons)
         {
-            value = this.config.app.content.scripts;
-            
             return {[`${PROPERTY_ID}`]: value};
         }
     }

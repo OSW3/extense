@@ -17,9 +17,9 @@
 // Imports
 
 const ManifestConfig = require('../ManifestConfig');
-const BrowserActionIcons = require('./BrowserActionIcons');
-const BrowserActionPopup = require('./BrowserActionPopup');
-const BrowserActionTooltip = require('./BrowserActionTooltip');
+const Icons = require('./BrowserAction/Icons');
+const Popup = require('./BrowserAction/Popup');
+const Tooltip = require('./BrowserAction/Tooltip');
 
 
 /******************************************************************************/
@@ -44,9 +44,9 @@ module.exports = class BrowserAction extends ManifestConfig
     {
         if (null != this.config.app && null != this.config.app.browser_action)
         {
-            this.properties.push( new BrowserActionPopup( this.kernel ) );
-            this.properties.push( new BrowserActionTooltip( this.kernel ) );
-            this.properties.push( new BrowserActionIcons( this.kernel ) );
+            this.properties.push( new Popup( this.kernel ) );
+            this.properties.push( new Tooltip( this.kernel ) );
+            this.properties.push( new Icons( this.kernel ) );
 
             this.getData();
 

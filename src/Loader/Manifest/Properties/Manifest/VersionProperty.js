@@ -1,7 +1,7 @@
 /**
- * background.scripts Property
+ * Manifest Version
  * --
- * Generate the "background.scripts" property of manifest.json
+ * Generate the "manifest_version" property of manifest.json
  * 
  * @version 1.0
  * @since 1.0
@@ -15,7 +15,7 @@
 /******************************************************************************/
 // Imports
 
-const ManifestConfig = require('../ManifestConfig');
+const ManifestConfig = require('../../ManifestConfig');
 
 
 /******************************************************************************/
@@ -23,8 +23,10 @@ const ManifestConfig = require('../ManifestConfig');
 /******************************************************************************/
 // Consts
 
-const INCLUDE_PROPERTY_ID = 'matches';
-const EXCLUDE_PROPERTY_ID = 'exclude_matches';
+const PROPERTY_ID = 'manifest_version';
+
+const MANIFEST_VERSION_MIN = 2;
+const MANIFEST_VERSION_MAX = 3;
 
 
 /******************************************************************************/
@@ -32,20 +34,22 @@ const EXCLUDE_PROPERTY_ID = 'exclude_matches';
 /******************************************************************************/
 // Exports
 
-module.exports = class ContentScriptsMatches extends ManifestConfig
+module.exports = class VersionProperty extends ManifestConfig
 {
     getProperty()
     {
-        if (null != this.config.app.content.matches)
+        let value = null;
+
+        if (null == (value = this.config.manifest.version))
         {
-            if (null != this.config.app.content.matches.include)
-            {
-                return {[`${INCLUDE_PROPERTY_ID}`]: this.config.app.content.matches.include};
-            }
-            if (null != this.config.app.content.matches.exclude)
-            {
-                return {[`${EXCLUDE_PROPERTY_ID}`]: this.config.app.content.matches.exclude};
-            }
+            throw new Error(`The manifest version is required`);
         }
+
+        if (value < MANIFEST_VERSION_MIN || value > MANIFEST_VERSION_MAX)
+        {
+            throw new Error(`The manifest version must be an integer value between ${MANIFEST_VERSION_MIN} and ${MANIFEST_VERSION_MAX}`);
+        }
+
+        return {[`${PROPERTY_ID}`]: value};
     }
 }

@@ -1,7 +1,7 @@
 /**
- * content_scripts.frames Property
+ * background.scripts Property
  * --
- * Generate the "content_scripts.frames" property of manifest.json
+ * Generate the "background.scripts" property of manifest.json
  * 
  * @version 1.0
  * @since 1.0
@@ -15,7 +15,7 @@
 /******************************************************************************/
 // Imports
 
-const ManifestConfig = require('../ManifestConfig');
+const ManifestConfig = require('../../ManifestConfig');
 
 
 /******************************************************************************/
@@ -23,7 +23,7 @@ const ManifestConfig = require('../ManifestConfig');
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'all_frames';
+const PROPERTY_ID = 'default_icon';
 
 
 /******************************************************************************/
@@ -31,12 +31,17 @@ const PROPERTY_ID = 'all_frames';
 /******************************************************************************/
 // Exports
 
-module.exports = class ContentScriptsFrames extends ManifestConfig
+module.exports = class Icons extends ManifestConfig
 {
     getProperty()
     {
-        let value = this.config.app.content.all_frames ? true : false;
+        let value = null;
         
-        return {[`${PROPERTY_ID}`]: value};
+        if (null != this.config.app.browser_action.icon)
+        {
+            value = this.config.app.browser_action.icon;
+            
+            return {[`${PROPERTY_ID}`]: value};
+        }
     }
 }

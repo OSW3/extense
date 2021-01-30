@@ -1,3 +1,5 @@
+const { config } = require("webpack");
+const BackgroundScriptsLoader = require("./Loader/BackgroundScripts/BackgroundScriptsLoader");
 const ManifestLoader = require("./Loader/Manifest/ManifestLoader");
 
 const DIST_DIRECTORY = '/dist/';
@@ -15,11 +17,25 @@ module.exports = class Kernel
 
     load()
     {
+        let loaders = [
+            new ManifestLoader( this ),
+            new BackgroundScriptsLoader( this ),
+        ];
+
         try {
-            return [
-                new ManifestLoader( this ).getConfig()
-                // new BackgroundLoader()
-            ];
+
+            return new function() {
+                let webpackConfig = [];
+
+                loaders.forEach(loader => {
+
+                    // console.log(loader);
+                    webpackConfig.push( loader.getConfig() );
+                });
+
+                return webpackConfig;
+            };
+
         } catch(e) {
             console.error( e.message );
         }

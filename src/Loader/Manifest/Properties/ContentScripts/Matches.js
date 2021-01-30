@@ -1,7 +1,7 @@
 /**
- * browser_action.default_popup Property
+ * background.scripts Property
  * --
- * Generate the "browser_action.default_popup" property of manifest.json
+ * Generate the "background.scripts" property of manifest.json
  * 
  * @version 1.0
  * @since 1.0
@@ -15,7 +15,7 @@
 /******************************************************************************/
 // Imports
 
-const ManifestConfig = require('../ManifestConfig');
+const ManifestConfig = require('../../ManifestConfig');
 
 
 /******************************************************************************/
@@ -23,7 +23,8 @@ const ManifestConfig = require('../ManifestConfig');
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'default_popup';
+const INCLUDE_PROPERTY_ID = 'matches';
+const EXCLUDE_PROPERTY_ID = 'exclude_matches';
 
 
 /******************************************************************************/
@@ -31,17 +32,20 @@ const PROPERTY_ID = 'default_popup';
 /******************************************************************************/
 // Exports
 
-module.exports = class BrowserActionPopup extends ManifestConfig
+module.exports = class Matches extends ManifestConfig
 {
     getProperty()
     {
-        let value = null;
-        
-        if (null != this.config.app.browser_action.popup)
+        if (null != this.config.app.content.matches)
         {
-            value = this.config.app.browser_action.popup;
-            
-            return {[`${PROPERTY_ID}`]: value};
+            if (null != this.config.app.content.matches.include)
+            {
+                return {[`${INCLUDE_PROPERTY_ID}`]: this.config.app.content.matches.include};
+            }
+            if (null != this.config.app.content.matches.exclude)
+            {
+                return {[`${EXCLUDE_PROPERTY_ID}`]: this.config.app.content.matches.exclude};
+            }
         }
     }
 }

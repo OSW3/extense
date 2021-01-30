@@ -15,7 +15,7 @@
 /******************************************************************************/
 // Imports
 
-const ManifestConfig = require('../ManifestConfig');
+const ManifestConfig = require('../../ManifestConfig');
 
 
 /******************************************************************************/
@@ -23,7 +23,7 @@ const ManifestConfig = require('../ManifestConfig');
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'run_at';
+const PROPERTY_ID = 'scripts';
 
 
 /******************************************************************************/
@@ -31,15 +31,15 @@ const PROPERTY_ID = 'run_at';
 /******************************************************************************/
 // Exports
 
-module.exports = class ContentScriptsRunTime extends ManifestConfig
+module.exports = class BackgroundScripts extends ManifestConfig
 {
     getProperty()
     {
         let value = null;
         
-        if (null != this.config.app.content.run_time)
+        if (null != this.config.app.background.scripts)
         {
-            value = this.config.app.content.run_time;
+            value = this.config.app.background.scripts;
             
             return {[`${PROPERTY_ID}`]: value};
         }

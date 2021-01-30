@@ -15,7 +15,7 @@
 /******************************************************************************/
 // Imports
 
-const ManifestConfig = require('../ManifestConfig');
+const ManifestConfig = require('../../ManifestConfig');
 
 
 /******************************************************************************/
@@ -23,7 +23,8 @@ const ManifestConfig = require('../ManifestConfig');
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'css';
+const INCLUDE_PROPERTY_ID = 'include_globs';
+const EXCLUDE_PROPERTY_ID = 'exclude_globs';
 
 
 /******************************************************************************/
@@ -31,17 +32,20 @@ const PROPERTY_ID = 'css';
 /******************************************************************************/
 // Exports
 
-module.exports = class ContentScriptsStylecheets extends ManifestConfig
+module.exports = class Globs extends ManifestConfig
 {
     getProperty()
     {
-        let value = null;
-        
-        if (null != this.config.app.content.stylesheets)
+        if (null != this.config.app.content.globs)
         {
-            value = this.config.app.content.stylesheets;
-            
-            return {[`${PROPERTY_ID}`]: value};
+            if (null != this.config.app.content.globs.include)
+            {
+                return {[`${INCLUDE_PROPERTY_ID}`]: this.config.app.content.globs.include};
+            }
+            if (null != this.config.app.content.globs.exclude)
+            {
+                return {[`${EXCLUDE_PROPERTY_ID}`]: this.config.app.content.globs.exclude};
+            }
         }
     }
 }

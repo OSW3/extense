@@ -15,7 +15,7 @@
 /******************************************************************************/
 // Imports
 
-const ManifestConfig = require('../ManifestConfig');
+const ManifestConfig = require('../../ManifestConfig');
 
 
 /******************************************************************************/
@@ -31,7 +31,7 @@ const PROPERTY_ID = 'persistent';
 /******************************************************************************/
 // Exports
 
-module.exports = class BackgroundPersistent extends ManifestConfig
+module.exports = class PersistentProperty extends ManifestConfig
 {
     getProperty()
     {
