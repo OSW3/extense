@@ -1,8 +1,7 @@
 /**
- * background Property
+ * browser_action.default_popup Property
  * --
- * Generate the "background" property of manifest.json
- * https://developer.chrome.com/docs/extensions/mv2/background_pages/
+ * Generate the "browser_action.default_popup" property of manifest.json
  * 
  * @version 1.0
  * @since 1.0
@@ -18,16 +17,13 @@
 
 const ManifestConfig = require('../ManifestConfig');
 
-const BackgroundPersistent = require('./BackgroundPersistent');
-const BackgroundScripts = require('./BackgroundScripts');
-
 
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'background';
+const PROPERTY_ID = 'default_popup';
 
 
 /******************************************************************************/
@@ -35,28 +31,17 @@ const PROPERTY_ID = 'background';
 /******************************************************************************/
 // Exports
 
-module.exports = class Background extends ManifestConfig
+module.exports = class BrowserActionPopup extends ManifestConfig
 {
-    output = Object.assign({});
-    properties = [];
-    
     getProperty()
     {
-        if (null != this.config.app && null != this.config.app.background)
+        let value = null;
+        
+        if (null != this.config.app.browser_action.popup)
         {
-            this.properties.push( new BackgroundScripts( this.kernel ) );
-            this.properties.push( new BackgroundPersistent( this.kernel ) );
-
-            this.getData();
-
-            return {[`${PROPERTY_ID}`]: this.output};
+            value = this.config.app.browser_action.popup;
+            
+            return {[`${PROPERTY_ID}`]: value};
         }
-    }
-
-    getData()
-    {
-        this.properties.forEach(property => {
-            this.output = Object.assign(this.output, property.getProperty()) ;
-        });
     }
 }

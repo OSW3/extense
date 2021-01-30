@@ -1,8 +1,8 @@
 /**
- * background Property
+ * content_scripts Property
  * --
- * Generate the "background" property of manifest.json
- * https://developer.chrome.com/docs/extensions/mv2/background_pages/
+ * Generate the "content_scripts" property of manifest.json
+ * https://developer.chrome.com/docs/extensions/mv2/content_scripts/
  * 
  * @version 1.0
  * @since 1.0
@@ -17,9 +17,12 @@
 // Imports
 
 const ManifestConfig = require('../ManifestConfig');
-
-const BackgroundPersistent = require('./BackgroundPersistent');
-const BackgroundScripts = require('./BackgroundScripts');
+const ContentScriptsFrames = require('./ContentScriptsFrames');
+const ContentScriptsGlobs = require('./ContentScriptsGlobs');
+const ContentScriptsMatches = require('./ContentScriptsMatches');
+const ContentScriptsRunTime = require('./ContentScriptsRunTime');
+const ContentScriptsScripts = require('./ContentScriptsScripts');
+const ContentScriptsStylecheets = require('./ContentScriptsStylecheets');
 
 
 /******************************************************************************/
@@ -27,7 +30,7 @@ const BackgroundScripts = require('./BackgroundScripts');
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'background';
+const PROPERTY_ID = 'content_scripts';
 
 
 /******************************************************************************/
@@ -35,17 +38,21 @@ const PROPERTY_ID = 'background';
 /******************************************************************************/
 // Exports
 
-module.exports = class Background extends ManifestConfig
+module.exports = class ContentScripts extends ManifestConfig
 {
     output = Object.assign({});
     properties = [];
     
     getProperty()
     {
-        if (null != this.config.app && null != this.config.app.background)
+        if (null != this.config.app && null != this.config.app.content)
         {
-            this.properties.push( new BackgroundScripts( this.kernel ) );
-            this.properties.push( new BackgroundPersistent( this.kernel ) );
+            this.properties.push( new ContentScriptsScripts( this.kernel ) );
+            this.properties.push( new ContentScriptsStylecheets( this.kernel ) );
+            this.properties.push( new ContentScriptsFrames( this.kernel ) );
+            this.properties.push( new ContentScriptsRunTime( this.kernel ) );
+            this.properties.push( new ContentScriptsMatches( this.kernel ) );
+            this.properties.push( new ContentScriptsGlobs( this.kernel ) );
 
             this.getData();
 

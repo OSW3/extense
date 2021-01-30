@@ -32,6 +32,8 @@ const UiIcons = require('./Properties/UiIcons');
 const PermissionsDefault = require('./Properties/PermissionsDefault');
 const PermissionsOptional = require('./Properties/PermissionsOptional');
 const Background = require('./Properties/Background');
+const BrowserAction = require('./Properties/BrowserAction');
+const ContentScripts = require('./Properties/ContentScripts');
 
 
 /******************************************************************************/
@@ -65,6 +67,8 @@ module.exports = class ManifestLoader extends ManifestConfig
         new PermissionsDefault( this.kernel ),
         new PermissionsOptional( this.kernel ),
         new Background( this.kernel ),
+        new BrowserAction( this.kernel ),
+        new ContentScripts( this.kernel ),
     ];
 
     getConfig()
@@ -79,7 +83,7 @@ module.exports = class ManifestLoader extends ManifestConfig
                     this.getData(),
                 )
             ]),
-            // __dump: this.getData(),
+            __dump: this.getData(),
         });
     }
 

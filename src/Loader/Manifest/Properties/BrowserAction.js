@@ -1,8 +1,8 @@
 /**
- * background Property
+ * browser_action Property
  * --
- * Generate the "background" property of manifest.json
- * https://developer.chrome.com/docs/extensions/mv2/background_pages/
+ * Generate the "browser_action" property of manifest.json
+ * https://developer.chrome.com/docs/extensions/mv2/content_scripts/
  * 
  * @version 1.0
  * @since 1.0
@@ -17,9 +17,9 @@
 // Imports
 
 const ManifestConfig = require('../ManifestConfig');
-
-const BackgroundPersistent = require('./BackgroundPersistent');
-const BackgroundScripts = require('./BackgroundScripts');
+const BrowserActionIcons = require('./BrowserActionIcons');
+const BrowserActionPopup = require('./BrowserActionPopup');
+const BrowserActionTooltip = require('./BrowserActionTooltip');
 
 
 /******************************************************************************/
@@ -27,7 +27,7 @@ const BackgroundScripts = require('./BackgroundScripts');
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'background';
+const PROPERTY_ID = 'browser_action';
 
 
 /******************************************************************************/
@@ -35,17 +35,18 @@ const PROPERTY_ID = 'background';
 /******************************************************************************/
 // Exports
 
-module.exports = class Background extends ManifestConfig
+module.exports = class BrowserAction extends ManifestConfig
 {
     output = Object.assign({});
     properties = [];
     
     getProperty()
     {
-        if (null != this.config.app && null != this.config.app.background)
+        if (null != this.config.app && null != this.config.app.browser_action)
         {
-            this.properties.push( new BackgroundScripts( this.kernel ) );
-            this.properties.push( new BackgroundPersistent( this.kernel ) );
+            this.properties.push( new BrowserActionPopup( this.kernel ) );
+            this.properties.push( new BrowserActionTooltip( this.kernel ) );
+            this.properties.push( new BrowserActionIcons( this.kernel ) );
 
             this.getData();
 

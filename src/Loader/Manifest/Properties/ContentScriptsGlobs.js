@@ -1,8 +1,7 @@
 /**
- * background Property
+ * background.scripts Property
  * --
- * Generate the "background" property of manifest.json
- * https://developer.chrome.com/docs/extensions/mv2/background_pages/
+ * Generate the "background.scripts" property of manifest.json
  * 
  * @version 1.0
  * @since 1.0
@@ -18,16 +17,14 @@
 
 const ManifestConfig = require('../ManifestConfig');
 
-const BackgroundPersistent = require('./BackgroundPersistent');
-const BackgroundScripts = require('./BackgroundScripts');
-
 
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
 // Consts
 
-const PROPERTY_ID = 'background';
+const INCLUDE_PROPERTY_ID = 'include_globs';
+const EXCLUDE_PROPERTY_ID = 'exclude_globs';
 
 
 /******************************************************************************/
@@ -35,28 +32,20 @@ const PROPERTY_ID = 'background';
 /******************************************************************************/
 // Exports
 
-module.exports = class Background extends ManifestConfig
+module.exports = class ContentScriptsGlobs extends ManifestConfig
 {
-    output = Object.assign({});
-    properties = [];
-    
     getProperty()
     {
-        if (null != this.config.app && null != this.config.app.background)
+        if (null != this.config.app.content.globs)
         {
-            this.properties.push( new BackgroundScripts( this.kernel ) );
-            this.properties.push( new BackgroundPersistent( this.kernel ) );
-
-            this.getData();
-
-            return {[`${PROPERTY_ID}`]: this.output};
+            if (null != this.config.app.content.globs.include)
+            {
+                return {[`${INCLUDE_PROPERTY_ID}`]: this.config.app.content.globs.include};
+            }
+            if (null != this.config.app.content.globs.exclude)
+            {
+                return {[`${EXCLUDE_PROPERTY_ID}`]: this.config.app.content.globs.exclude};
+            }
         }
-    }
-
-    getData()
-    {
-        this.properties.forEach(property => {
-            this.output = Object.assign(this.output, property.getProperty()) ;
-        });
     }
 }
