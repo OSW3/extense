@@ -19,11 +19,11 @@
     "url": "https://github.com/OSW3/extense/issues"
   },
   "homepage": "https://github.com/OSW3/extense#readme",
-  "devDependencies": {
+  "dependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "generate-json-webpack-plugin": "^2.0.0",
     "remove-files-webpack-plugin": "^1.4.4",
-    "webpack": "^5.18.0",
+    "webpack": "^5.19.0",
     "webpack-cli": "^4.4.0",
     "yaml-reader": "^1.0.3"
   }
