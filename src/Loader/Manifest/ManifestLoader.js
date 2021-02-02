@@ -14,6 +14,8 @@
 /******************************************************************************/
 // Imports
 
+const { MANIFEST_OUTPUT_FILE } = require('./../../Config/Config');
+
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 
 const EmptyLoader = require('../Empty/EmptyLoader');
@@ -112,7 +114,7 @@ module.exports = class ManifestLoader
             name: LOADER_ID,
             plugins: this.#config.plugins.concat([
                 new GenerateJsonPlugin(
-                    this.output, 
+                    `${this.#kernel.project_dir}/${MANIFEST_OUTPUT_FILE}`, 
                     this.getManifest
                 )
             ]),
