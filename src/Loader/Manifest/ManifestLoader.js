@@ -114,7 +114,7 @@ module.exports = class ManifestLoader
             name: LOADER_ID,
             plugins: this.#config.plugins.concat([
                 new GenerateJsonPlugin(
-                    `${MANIFEST_OUTPUT_FILE}`, 
+                    MANIFEST_OUTPUT_FILE,
                     this.getManifest
                 )
             ]),

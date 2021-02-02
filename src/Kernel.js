@@ -1,5 +1,6 @@
 'use strict';
 
+const CleanLoader = require('./Loader/Clean/CleanLoader');
 const ManifestLoader = require('./Loader/Manifest/ManifestLoader');
 
 module.exports = class Kernel
@@ -18,6 +19,7 @@ module.exports = class Kernel
      * @var Array
      */
     loaders = [
+        CleanLoader,
         ManifestLoader,
         // new BackgroundScriptsLoader( this ),
     ];
