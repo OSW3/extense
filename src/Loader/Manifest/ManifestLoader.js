@@ -71,7 +71,7 @@ module.exports = class ManifestLoader
         UiProperties,
         SecurityProperties,
         BackgroundProperties,
-        ContentScriptsProperties,
+        // ContentScriptsProperties,
         BrowserActionProperties,
     ];
 
@@ -106,19 +106,27 @@ module.exports = class ManifestLoader
 
     getConfig()
     {
+        // Get properties
         this.propertiesBuilder();
 
-        this.#kernel.log(`The Manifest`, this.getManifest);
+        // Compiled "manifest.json" data
+        let manifest = this.getManifest;
 
-        return Object.assign(this.#config, {
+        // Compiled output config
+        let loader = {
             name: LOADER_ID,
             plugins: this.#config.plugins.concat([
                 new GenerateJsonPlugin(
                     MANIFEST_OUTPUT_FILE,
-                    this.getManifest
+                    manifest
                 )
             ]),
-        });
+        };
+
+        this.#kernel.log(`The Manifest`, manifest);
+        this.#kernel.log(`Manifest Loader`, loader.plugins);
+
+        return Object.assign(this.#config, loader);
     }
 
     propertiesBuilder()
