@@ -1,7 +1,7 @@
 /**
- * icons Property
+ * permissions Property
  * --
- * Generate the "icons" property of manifest.json
+ * Generate the "permissions" property of manifest.json
  * 
  * @version 1.0
  * @since 1.0
@@ -9,15 +9,14 @@
 'use strict';
 
 const PropertyProvider = require('../../../../Providers/PropertyProvider');
+const PROPERTY_ID = 'permissions';
 
-const PROPERTY_ID = 'icons';
-
-module.exports = class IconsProperty extends PropertyProvider
+module.exports = class PermissionsDefaultProperty extends PropertyProvider
 {
     getProperty()
     {
-        let value = this.config.ui.icons;
-        
+        let value = this.config.security.permissions;
+
         if (value)
         {
             return {[`${PROPERTY_ID}`]: value};

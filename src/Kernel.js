@@ -1,52 +1,85 @@
-const { config } = require("webpack");
-const BackgroundScriptsLoader = require("./Loader/BackgroundScripts/BackgroundScriptsLoader");
-const ManifestLoader = require("./Loader/Manifest/ManifestLoader");
+'use strict';
 
-const DIST_DIRECTORY = '/dist/';
+const ManifestLoader = require('./Loader/Manifest/ManifestLoader');
 
 module.exports = class Kernel
 {
-    #project_dir;
-    #dist_dir;
+    /**
+     * Debug Mode
+     * 
+     * @var bool
+     * @default false
+     */
+    #debug = false;
+
+    /**
+     * Loaders Instances storage
+     * 
+     * @var Array
+     */
+    loaders = [
+        ManifestLoader,
+        // new BackgroundScriptsLoader( this ),
+    ];
+
+    /**
+     * The absolute project directory
+     * 
+     * @var string
+     */
+    project_dir;
 
     constructor(project_dir)
     {
-        this.#project_dir = project_dir;
-        this.#dist_dir = `${this.project_dir}${DIST_DIRECTORY}`;
+        if (typeof project_dir === 'undefined')
+        {
+            this.error = `You need to pass the constant "__dirname" as parameter of the instance of ExtenseFramework.\nEx : new ExtenseFramework(__dirname);`;
+        }
+
+        this.project_dir = project_dir;
     }
 
-    load()
+    /**
+     * Set debug mode
+     * 
+     * @param bool activate
+     */
+    set debug( activate=false )
     {
-        let loaders = [
-            new ManifestLoader( this ),
-            new BackgroundScriptsLoader( this ),
-        ];
+        this.#debug = activate;
+    }
 
-        try {
+    /**
+     * Get the state of debug mode
+     * 
+     * @return bool debug state
+     */
+    get debug()
+    {
+        return this.#debug;
+    }
 
-            return new function() {
-                let webpackConfig = [];
-
-                loaders.forEach(loader => {
-
-                    // console.log(loader);
-                    webpackConfig.push( loader.getConfig() );
-                });
-
-                return webpackConfig;
-            };
-
-        } catch(e) {
-            console.error( e.message );
+    /**
+     * Console log a message
+     */
+    log()
+    {
+        if (this.debug)
+        {
+            console.log( Array.from(arguments) );
         }
     }
 
-    get project_dir()
+    /**
+     * Create new error message
+     */
+    error( message )
     {
-        return this.#project_dir;
-    }
-    get dist_dir()
-    {
-        return this.#dist_dir;
+        let outputMessage = `\n\n`;
+            outputMessage+= `EXTENSE FRAMEWORK ERROR\n`;
+            outputMessage+= `==============================\n\n`;
+            outputMessage+= `Message: ${message}\n\n`;
+            outputMessage+= `------------------------------\n\n`;
+        throw new Error( outputMessage );
     }
 }

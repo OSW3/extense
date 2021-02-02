@@ -6,23 +6,21 @@
  * @version 1.0
  * @since 1.0
  */
-
 'use strict';
 
 const PropertyProvider = require('../../../../Providers/PropertyProvider');
-const PROPERTY_ID = 'scripts';
+const PROPERTY_ID = 'run_at';
 
-module.exports = class ScriptsProperty extends PropertyProvider
+module.exports = class RunTimeProperty extends PropertyProvider
 {
     getProperty()
     {
-        // TODO: Value must be an array or string if once
-        
+        // TODO: Check runtime value
         let value = null;
         
-        if (null != this.config.background.scripts)
+        if (null != this.config.content.run_time)
         {
-            value = this.config.background.scripts;
+            value = this.config.content.run_time;
             
             return {[`${PROPERTY_ID}`]: value};
         }

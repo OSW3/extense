@@ -1,25 +1,18 @@
-/**
- * icons Property
- * --
- * Generate the "icons" property of manifest.json
- * 
- * @version 1.0
- * @since 1.0
- */
 'use strict';
 
 const PropertyProvider = require('../../../../Providers/PropertyProvider');
-
-const PROPERTY_ID = 'icons';
+const PROPERTY_ID = 'default_icon';
 
 module.exports = class IconsProperty extends PropertyProvider
 {
     getProperty()
     {
-        let value = this.config.ui.icons;
+        let value = null;
         
-        if (value)
+        if (null != this.config.browser_action.icon)
         {
+            value = this.config.browser_action.icon;
+            
             return {[`${PROPERTY_ID}`]: value};
         }
     }

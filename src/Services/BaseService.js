@@ -2,7 +2,8 @@
 
 module.exports = class BaseService
 {
-    #base;
+
+    #base = "Marche pas";
 
     set set(base)
     {

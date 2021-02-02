@@ -11,6 +11,13 @@
 
 const MODE = 'production';
 
+const BASE_CONFIG = {
+    mode: MODE,
+    module: {},
+    plugins: [],
+};
+
+
 
 
 /******************************************************************************/
@@ -18,8 +25,5 @@ const MODE = 'production';
 /******************************************************************************/
 // Exports
 
-module.exports = {
-    mode: MODE,
-    module: {},
-    plugins: [],
-};
+exports.MODE = MODE;
+exports.BASE_CONFIG = BASE_CONFIG;

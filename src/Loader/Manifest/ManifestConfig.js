@@ -18,18 +18,8 @@
 const yaml = require('yaml-reader');
 const path = require("path");
 
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-// Consts
-
-// The YAML source of the manifest
-const SOURCE = '/src/config/manifest.yml';
-
-// The JSON output of the manifest
-// const OUTPUT = '/dist/manifest.json';
-const OUTPUT = '/manifest.json';
+const { MANIFEST_CONFIG_FILE, 
+        MANIFEST_OUTPUT_FILE } = require('./../../Config/Config');
 
 
 /******************************************************************************/
@@ -62,13 +52,14 @@ module.exports = class ManifestConfig
         this.kernel = kernel;
 
         // Build the absolute path of the manifest config file
-        this.source = `${kernel.project_dir}${SOURCE}`;
+        this.source = `${kernel.project_dir}${MANIFEST_CONFIG_FILE}`;
 
         // Build the absolute path of the manifest json
         // this.output = `${kernel.project_dir}${OUTPUT}`;
-        this.output = path.resolve(kernel.project_dir, OUTPUT);
+        this.output = path.resolve(kernel.project_dir, MANIFEST_OUTPUT_FILE);
 
         // Read the manifest data of the YML source
         this.config = yaml.read( this.source );
     }
+
 }

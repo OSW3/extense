@@ -6,42 +6,19 @@
  * @version 1.0
  * @since 1.0
  */
-
 'use strict';
 
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-// Imports
-
-const ManifestConfig = require('../../ManifestConfig');
-
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-// Consts
-
+const PropertyProvider = require('../../../../Providers/PropertyProvider');
 const PROPERTY_ID = 'persistent';
 
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-// Exports
-
-module.exports = class PersistentProperty extends ManifestConfig
+module.exports = class PersistentProperty extends PropertyProvider
 {
     getProperty()
     {
-        let value = null;
+        // TODO: switch at TRUE if the chorme.webRequest is used
+        // https://developer.chrome.com/docs/extensions/reference/webRequest/
+        let value = false;
         
-        if (null != this.config.app.background.persistent)
-        {
-            value = this.config.app.background.persistent;
-            
-            return {[`${PROPERTY_ID}`]: value};
-        }
+        return {[`${PROPERTY_ID}`]: value};
     }
 }

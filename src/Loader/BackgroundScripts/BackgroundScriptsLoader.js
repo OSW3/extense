@@ -40,6 +40,13 @@ const outputPath = path.resolve(__dirname, "../../dist/");
 
 module.exports = class BackgroundScriptsLoader
 {
+    kernel;
+
+    constructor( kernel )
+    {
+        this.kernel = kernel;
+    }
+    
     getConfig()
     {
         return Object.assign(BASE_CONFIG, {

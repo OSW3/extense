@@ -6,7 +6,6 @@
  * @version 1.0
  * @since 1.0
  */
-
 'use strict';
 
 
@@ -18,23 +17,15 @@
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 
 const EmptyLoader = require('../Empty/EmptyLoader');
+const LocalesProperties = require('./Properties/LocalesProperties');
 
-const ManifestConfig = require('./ManifestConfig');
-
-const Manifest_VersionProperty = require('./Properties/Manifest/VersionProperty');
-const ExtensionName = require('./Properties/ExtensionName');
-const ExtensionShortName = require('./Properties/ExtensionShortName');
-const ExtensionDescription = require('./Properties/ExtensionDescription');
-const ExtensionVersion = require('./Properties/ExtensionVersion');
-const ExtensionAuthor = require('./Properties/ExtensionAuthor');
-const ExtensionUrl = require('./Properties/ExtensionUrl');
-const LocalesDefault = require('./Properties/LocalesDefault');
-const UI_IconsProperty = require('./Properties/UI/IconsProperty');
-const PermissionsDefault = require('./Properties/PermissionsDefault');
-const PermissionsOptional = require('./Properties/PermissionsOptional');
-const BackgroundScripts = require('./Properties/BackgroundScripts');
-const BrowserAction = require('./Properties/BrowserAction');
-const ContentScripts = require('./Properties/ContentScripts');
+const ManifestProperties = require('./Properties/ManifestProperties');
+const PackageProperties = require('./Properties/PackageProperties');
+const UiProperties = require('./Properties/UiProperties');
+const SecurityProperties = require('./Properties/SecurityProperties');
+const BackgroundProperties = require('./Properties/BackgroundProperties');
+const ContentScriptsProperties = require('./Properties/ContentScriptsProperties');
+const BrowserActionProperties = require('./Properties/BrowserActionProperties');
 
 
 /******************************************************************************/
@@ -43,7 +34,6 @@ const ContentScripts = require('./Properties/ContentScripts');
 // Consts
 
 const LOADER_ID = 'manifest';
-// const BASE_CONFIG = require('../../Config/webpack.config');
 
 
 /******************************************************************************/
@@ -51,50 +41,91 @@ const LOADER_ID = 'manifest';
 /******************************************************************************/
 // Exports
 
-module.exports = class ManifestLoader extends ManifestConfig
+module.exports = class ManifestLoader
 {
-    manifest = Object.assign({});
+    /**
+     * Initialize outpout data
+     * 
+     * @var Object
+     */
+    #config = new Object;
 
-    properties = [
-        new Manifest_VersionProperty( this.kernel ),
-        new ExtensionName( this.kernel ),
-        new ExtensionShortName( this.kernel ),
-        new ExtensionDescription( this.kernel ),
-        new ExtensionVersion( this.kernel ),
-        new ExtensionAuthor( this.kernel ),
-        new ExtensionUrl( this.kernel ),
-        new LocalesDefault( this.kernel ),
-        new UI_IconsProperty( this.kernel ),
-        new PermissionsDefault( this.kernel ),
-        new PermissionsOptional( this.kernel ),
-        new BackgroundScripts( this.kernel ),
-        new BrowserAction( this.kernel ),
-        new ContentScripts( this.kernel ),
+    /**
+     * Output manifest json data
+     * 
+     * @var Object
+     */
+    #manifest = new Object;
+
+    /**
+     * Properties loaders
+     * 
+     * @var array
+     */
+    #properties = [
+        ManifestProperties,
+        PackageProperties,
+        LocalesProperties,
+        UiProperties,
+        SecurityProperties,
+        BackgroundProperties,
+        ContentScriptsProperties,
+        BrowserActionProperties,
     ];
+
+    /**
+     * Kernel Instance
+     * 
+     * @var Kernel
+     */
+    #kernel;
+
+    constructor( kernel ) 
+    {
+        // retrieve the Kernel instance
+        this.#kernel = kernel;
+
+        // Get the base config frome the empty loader
+        let baseConfig = new EmptyLoader( this.#kernel ).getConfig();
+
+        // Merge the default loader config with the base config
+        this.#config = Object.assign(this.#config, baseConfig);
+    }
+
+    get getManifest()
+    {
+        return this.#manifest;
+    }
+
+    set addToManifest( data )
+    {
+        Object.assign(this.#manifest, data) ;
+    }
 
     getConfig()
     {
-        let config = new EmptyLoader( this.kernel ).getConfig()
+        this.propertiesBuilder();
 
-        return Object.assign(config, {
+        this.#kernel.log(`The Manifest`, this.getManifest);
+
+        return Object.assign(this.#config, {
             name: LOADER_ID,
-            plugins: config.plugins.concat([
+            plugins: this.#config.plugins.concat([
                 new GenerateJsonPlugin(
                     this.output, 
-                    this.getData(),
+                    this.getManifest
                 )
             ]),
-            // __dump: this.getData(),
         });
     }
 
-    getData()
+    propertiesBuilder()
     {
-        this.properties.forEach(property => {
-            // console.log( property.getProperty() );
-            this.manifest = Object.assign(this.manifest, property.getProperty()) ;
-        });
+        this.#properties.forEach(item => {
 
-        return this.manifest;
+            let property = new item( this.#kernel );
+
+            this.addToManifest = property.builder();
+        });
     }
 }
