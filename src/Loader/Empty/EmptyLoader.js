@@ -1,28 +1,7 @@
-/**
- * Empty Loader
- * --
- * Load empty params for Webpack
- * 
- * @version 1.0
- * @since 1.0
- */
-
 'use strict';
-
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-// Imports
 
 const path = require("path");
 const RemovePlugin = require('remove-files-webpack-plugin');
-
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-// Consts
 
 const { FRAMEWORK_DIST_OUTPUT } = require("../../Config/Config");
 const LOADER_ID = 'empty';
@@ -49,15 +28,21 @@ module.exports = class EmptyLoader
 
     getConfig()
     {
+        let name = LOADER_ID;
+        let output_file = OUTPUT_FILE;
+        let output_dir = `${FRAMEWORK_DIST_OUTPUT}`;
+        let output_path = `${this.kernel.project_dir}${output_dir}`;
+
+
         return Object.assign(BASE_CONFIG, {
-            name: LOADER_ID,
+            name: name,
             entry: ENTRY_FILE,
             output: {
-                path: `${this.kernel.project_dir}${FRAMEWORK_DIST_OUTPUT}`,
-                filename: OUTPUT_FILE,
+                path: output_path, //`${this.kernel.project_dir}${FRAMEWORK_DIST_OUTPUT}`,
+                filename: output_file,
             },
             plugins: BASE_CONFIG.plugins.concat([
-                new RemovePlugin({after:{include:[ `${this.kernel.dist_dir}/${OUTPUT_FILE}` ]}}),
+                new RemovePlugin({after:{include:[ `${output_path}${output_file}` ]}}),
             ])
         });
     }
