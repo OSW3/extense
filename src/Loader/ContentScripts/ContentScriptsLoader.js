@@ -65,7 +65,7 @@ module.exports = class ContentScriptsLoader
 
             return this.render(loader);
         }
-        
+
         return new Array().concat(
             this.scriptsConfig,
             this.stylesConfig,
@@ -124,7 +124,10 @@ module.exports = class ContentScriptsLoader
                 },
             });
 
-            scripts.push(this.render(loader));
+            this.#kernel.log(`Content Scripts Loader (script)`, loader);
+
+            scripts.push( Object.assign(new Object, BASE_CONFIG, loader) );
+            // scripts.push(this.render(loader));
         }
 
         return scripts;
@@ -167,16 +170,38 @@ module.exports = class ContentScriptsLoader
                 entries[index] = `${this.#kernel.project_dir}${FRAMEWORK_SRC_DIRECTORY}${entry}`;
             });
 
-            let loader = Object.assign(new Object, {
+
+            let empty = new EmptyLoader( this.#kernel ).getConfig();
+            let loader = Object.assign(new Object, empty, {
                 name: loader_id,
-                entry: entries,
-                output: {
-                    path: `${this.#kernel.project_dir}${FRAMEWORK_DIST_DIRECTORY}`,
-                    filename: item.output
-                },
+                module: Object.assign( empty.module, {
+                    rules: [
+                        {
+                            test: /\.css$/i,
+                            use: ["style-loader", "css-loader"],
+                        }
+                    ]
+                    // entry: entries,
+                    // test: "test"
+                })
             });
 
-            styles.push(this.render(loader));
+            // console.log( loader.module );
+            // , {
+            //     name: loader_id,
+            //     // entry: entries,
+            //     // output: {
+            //     //     path: `${this.#kernel.project_dir}${FRAMEWORK_DIST_DIRECTORY}`,
+            //     //     filename: item.output
+            //     // },
+            // });
+
+            // styles.push(this.render(loader));
+
+
+            this.#kernel.log(`Content Scripts Loader (style)`, loader);
+
+            styles.push( Object.assign(new Object, BASE_CONFIG, loader) );
         }
 
         return styles;

@@ -37,8 +37,6 @@ module.exports = class StylecheetsProperty extends PropertyProvider
             styles.push(item.output);
         }
 
-        console.log(styles);
-
         return {[`${PROPERTY_ID}`]: styles};
     }
 }
