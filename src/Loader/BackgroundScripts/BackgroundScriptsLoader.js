@@ -107,9 +107,12 @@ module.exports = class BackgroundScriptsLoader
                 entry = new Array(entry);
             }
 
+
+            // console.log(item.output);
+
             let loader = Object.assign(new Object, {
                 name: loader_id,
-                entry: entry,
+                entry: entry[0],
                 output: {
                     path: `${this.#kernel.project_dir}${FRAMEWORK_DIST_OUTPUT}`,
                     filename: item.output
@@ -118,7 +121,7 @@ module.exports = class BackgroundScriptsLoader
 
             scripts.push(this.render(loader));
         }
-        
+
         return scripts;
     }
 
