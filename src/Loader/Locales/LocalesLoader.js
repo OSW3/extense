@@ -3,7 +3,9 @@
 const yaml = require('yaml-reader');
 const CopyPlugin = require("copy-webpack-plugin");
 const EmptyLoader = require('../Empty/EmptyLoader');
-const { LOCALES_CONFIG_FILE, FRAMEWORK_DIST_DIRECTORY } = require("../../Config/Config");
+const { LOCALES_CONFIG_FILE, 
+        DEFAULT_LOCALES_SOURCES_PATH,
+        FRAMEWORK_DIST_DIRECTORY } = require("../../Config/Config");
 
 const LOADER_ID = 'locales';
 
@@ -60,10 +62,21 @@ module.exports = class LocalesLoaders
 
     getConfig()
     {
-        // console.log( this.#config );
+        // Define path with default path value
+        let path = DEFAULT_LOCALES_SOURCES_PATH;
 
-        let path = `src/translations/`;
+        // Override the path if its defined in locales.yml
+        if (null != this.#config.locales.path)
+        {
+            path = this.#config.locales.path;
+        }
 
+        // Check the first char of "path", must be a "/"
+        if (path.charAt(0) != '/')
+        {
+            path = `/${path}`;
+        }
+        
         let loader = {
             name: LOADER_ID,
             plugins: this.#loader.plugins.concat([

@@ -32,6 +32,8 @@ module.exports = Object.freeze({
      */
     LOCALES_CONFIG_FILE: '/src/config/locales.yml',
 
+    DEFAULT_LOCALES_SOURCES_PATH: '/src/translations/',
+
     /**
      * Config file for "ui" section
      * 
