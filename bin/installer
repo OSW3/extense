@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# $ sudo curl -LsS https://extense.osw3.net/installer -o /usr/local/bin/extense
+# $ sudo chmod a+x /usr/local/bin/extense
+#
+# extense new my_project
+
+title="The Extense"
+command=$1
+project=$2
+
+# echo $title
+# echo $PWD
+# echo $1
+# echo $2
+
+# mkdir "${PWD}/${project}"
+# cd $project
+# echo $PWD
+
+# Clonage du depot sample
+git clone https://github.com/OSW3/extense-sample-project.git $project
+
+# Aller dans le répertoire projet
+cd $project
+
+# Suppression de la base de données GIT
+rm -rf .git
+
+# Initialisé git
+git init

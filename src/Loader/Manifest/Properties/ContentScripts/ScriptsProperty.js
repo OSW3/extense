@@ -15,13 +15,20 @@ module.exports = class ScriptsProperty extends PropertyProvider
 {
     getProperty()
     {
-        let value = null;
-        
-        if (null != this.config.content.scripts)
+        let scripts = [];
+
+        // Background scripts definition
+        let items = this.config.content.scripts;
+
+        for (const index in items) 
         {
-            value = this.config.content.scripts;
-            
-            return {[`${PROPERTY_ID}`]: value};
+            // Single script definition
+            let item = items[ index ];
+
+            // Get the Output filename
+            scripts.push(item.output);
         }
+
+        return {[`${PROPERTY_ID}`]: scripts};
     }
 }

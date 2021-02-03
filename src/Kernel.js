@@ -2,6 +2,7 @@
 
 const BackgroundScriptsLoader = require('./Loader/BackgroundScripts/BackgroundScriptsLoader');
 const CleanLoader = require('./Loader/Clean/CleanLoader');
+const ContentScriptsLoader = require('./Loader/ContentScripts/ContentScriptsLoader');
 const ManifestLoader = require('./Loader/Manifest/ManifestLoader');
 
 module.exports = class Kernel
@@ -23,6 +24,7 @@ module.exports = class Kernel
         CleanLoader,
         ManifestLoader,
         BackgroundScriptsLoader,
+        // ContentScriptsLoader,
     ];
 
     /**
