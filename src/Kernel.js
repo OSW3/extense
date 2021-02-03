@@ -3,7 +3,9 @@
 const BackgroundScriptsLoader = require('./Loader/BackgroundScripts/BackgroundScriptsLoader');
 const CleanLoader = require('./Loader/Clean/CleanLoader');
 const ContentScriptsLoader = require('./Loader/ContentScripts/ContentScriptsLoader');
+const LocalesLoaders = require('./Loader/Locales/LocalesLoader');
 const ManifestLoader = require('./Loader/Manifest/ManifestLoader');
+const TemplatesLoader = require('./Loader/Templates/TemplatesLoader');
 
 module.exports = class Kernel
 {
@@ -25,6 +27,9 @@ module.exports = class Kernel
         ManifestLoader,
         BackgroundScriptsLoader,
         ContentScriptsLoader,
+
+        LocalesLoaders,
+        // TemplatesLoader,
     ];
 
     /**

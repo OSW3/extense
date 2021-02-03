@@ -41,12 +41,12 @@ module.exports = class ContentScriptsLoader
         // this.#loader = Object.assign(this.#loader, BASE_CONFIG);
 
         // Build the absolute path of the manifest config file
-        this.source = `${this.#kernel.project_dir}${CONTENT_SCRIPTS_CONFIG_FILE}`;
+        let source = `${this.#kernel.project_dir}${CONTENT_SCRIPTS_CONFIG_FILE}`;
 
         try 
         {
             // Read the manifest data of the YML source
-            this.#config = yaml.read( this.source );
+            this.#config = yaml.read( source );
             this.#hasConfigData = true;
         } 
         catch(e) {}
@@ -171,6 +171,7 @@ module.exports = class ContentScriptsLoader
             });
 
 
+            // TODO: Copy css
             let empty = new EmptyLoader( this.#kernel ).getConfig();
             let loader = Object.assign(new Object, empty, {
                 name: loader_id,
