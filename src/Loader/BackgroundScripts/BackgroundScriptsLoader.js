@@ -98,7 +98,6 @@ module.exports = class BackgroundScriptsLoader
                 entries[index] = `${this.#kernel.project_dir}${FRAMEWORK_SRC_DIRECTORY}${entry}`;
             });
 
-
             let loader = Object.assign(new Object, {
                 name: loader_id,
                 entry: entries,
