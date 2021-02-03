@@ -5,24 +5,11 @@ const EmptyLoader = require('../Empty/EmptyLoader');
 
 const { BASE_CONFIG } = require('../../Config/webpack.config');
 
-
-
-
-
-// const path = require("path");
 const { BACKGROUND_CONFIG_FILE,
-        FRAMEWORK_DIST_OUTPUT } = require("../../Config/Config");
+        FRAMEWORK_DIST_DIRECTORY,
+        FRAMEWORK_SRC_DIRECTORY } = require("../../Config/Config");
 
 const LOADER_ID = 'background_scripts';
-
-
-
-const SOURCE = '/src/app/background/index.js';
-const OUTPUT = 'app/background.js';
-
-// const outputPath = path.resolve(__dirname, "../../dist/");
-
-
 
 module.exports = class BackgroundScriptsLoader
 {
@@ -100,21 +87,23 @@ module.exports = class BackgroundScriptsLoader
             // Single script definition
             let item = items[ index ];
 
-            let entry = item.input;
+            let entries = item.input;
 
-            if (typeof entry === 'string')
+            if (typeof entries === 'string')
             {
-                entry = new Array(entry);
+                entries = new Array(entries);
             }
 
+            entries.forEach((entry, index) => {
+                entries[index] = `${this.#kernel.project_dir}${FRAMEWORK_SRC_DIRECTORY}${entry}`;
+            });
 
-            // console.log(item.output);
 
             let loader = Object.assign(new Object, {
                 name: loader_id,
-                entry: entry[0],
+                entry: entries,
                 output: {
-                    path: `${this.#kernel.project_dir}${FRAMEWORK_DIST_OUTPUT}`,
+                    path: `${this.#kernel.project_dir}${FRAMEWORK_DIST_DIRECTORY}`,
                     filename: item.output
                 },
             });

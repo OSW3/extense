@@ -5,7 +5,12 @@ module.exports = Object.freeze({
     /**
      * The "dist" disrectory
      */
-    FRAMEWORK_DIST_OUTPUT: '/dist/',
+    FRAMEWORK_DIST_DIRECTORY: '/dist/',
+
+    /**
+     * The "src" disrectory
+     */
+    FRAMEWORK_SRC_DIRECTORY: '/src/',
 
     /**
      * Manifest source file

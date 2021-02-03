@@ -3,7 +3,7 @@
 const path = require("path");
 const RemovePlugin = require('remove-files-webpack-plugin');
 
-const { FRAMEWORK_DIST_OUTPUT } = require("../../Config/Config");
+const { FRAMEWORK_DIST_DIRECTORY } = require("../../Config/Config");
 const LOADER_ID = 'empty';
 
 const { BASE_CONFIG } = require('../../Config/webpack.config');
@@ -41,7 +41,7 @@ module.exports = class EmptyLoader
         let name = LOADER_ID;
         let input_file = ENTRY_FILE;
         let output_file = OUTPUT_FILE;
-        let output_dir = FRAMEWORK_DIST_OUTPUT;
+        let output_dir = FRAMEWORK_DIST_DIRECTORY;
         let output_path = `${this.#kernel.project_dir}${output_dir}`;
 
         // Loader object for EmptyLoader
