@@ -66,7 +66,7 @@ module.exports = class LocalesLoaders
         let path = DEFAULT_LOCALES_SOURCES_PATH;
 
         // Override the path if its defined in locales.yml
-        if (null != this.#config.locales.path)
+        if (this.#config.locales && this.#config.locales.path)
         {
             path = this.#config.locales.path;
         }

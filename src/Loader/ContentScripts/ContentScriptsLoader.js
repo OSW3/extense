@@ -68,7 +68,7 @@ module.exports = class ContentScriptsLoader
 
         return new Array().concat(
             this.scriptsConfig,
-            this.stylesConfig,
+            // this.stylesConfig,
         );
     }
 

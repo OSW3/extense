@@ -14,7 +14,7 @@
     "url": "git+https://github.com/OSW3/extense.git"
   },
   "author": "OSW3",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/OSW3/extense/issues"
   },
