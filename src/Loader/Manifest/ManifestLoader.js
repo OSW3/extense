@@ -46,11 +46,11 @@ const LOADER_ID = 'manifest';
 module.exports = class ManifestLoader
 {
     /**
-     * Initialize outpout data
+     * Output loader config
      * 
      * @var Object
      */
-    #config = new Object;
+    #loader = new Object;
 
     /**
      * Output manifest json data
@@ -71,7 +71,7 @@ module.exports = class ManifestLoader
         UiProperties,
         SecurityProperties,
         BackgroundProperties,
-        // ContentScriptsProperties,
+        ContentScriptsProperties,
         BrowserActionProperties,
     ];
 
@@ -91,7 +91,7 @@ module.exports = class ManifestLoader
         let baseConfig = new EmptyLoader( this.#kernel ).getConfig();
 
         // Merge the default loader config with the base config
-        this.#config = Object.assign(this.#config, baseConfig);
+        this.#loader = Object.assign(this.#loader, baseConfig);
     }
 
     get getManifest()
@@ -112,10 +112,10 @@ module.exports = class ManifestLoader
         // Compiled "manifest.json" data
         let manifest = this.getManifest;
 
-        // Compiled output config
+        // Loader object for ManifestLoader
         let loader = {
             name: LOADER_ID,
-            plugins: this.#config.plugins.concat([
+            plugins: this.#loader.plugins.concat([
                 new GenerateJsonPlugin(
                     MANIFEST_OUTPUT_FILE,
                     manifest
@@ -126,7 +126,7 @@ module.exports = class ManifestLoader
         this.#kernel.log(`The Manifest`, manifest);
         this.#kernel.log(`Manifest Loader`, loader.plugins);
 
-        return Object.assign(this.#config, loader);
+        return Object.assign(this.#loader, loader);
     }
 
     propertiesBuilder()

@@ -31,17 +31,5 @@ module.exports = class ScriptsProperty extends PropertyProvider
         }
 
         return {[`${PROPERTY_ID}`]: scripts};
-
-
-        // TODO: Value must be an array or string if once
-        
-        // let value = null;
-        
-        // if (null != this.config.background.scripts)
-        // {
-        //     value = this.config.background.scripts;
-            
-        //     return {[`${PROPERTY_ID}`]: value};
-        // }
     }
 }

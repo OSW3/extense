@@ -21,8 +21,14 @@ module.exports = class ExtenseFramework extends Kernel
                 // Get the loader config
                 let config = loader.getConfig();
 
-                // Push the config to
-                wpc.push( config );
+                // Check if config is iterable
+                if (typeof config[Symbol.iterator] != 'function')
+                {
+                    config = new Array(config);
+                }
+
+                // Add each config to the output WebPack Config
+                config.forEach(item => wpc.push( item ));
             });
 
             return wpc;

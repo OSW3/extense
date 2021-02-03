@@ -11,11 +11,11 @@ const LOADER_ID = 'clean';
 module.exports = class CleanLoader
 {
     /**
-     * Initialize outpout data
+     * Output loader config
      * 
      * @var Object
      */
-    #config = new Object;
+    #loader = new Object;
 
     /**
      * Kernel Instance
@@ -33,16 +33,19 @@ module.exports = class CleanLoader
         let baseConfig = new EmptyLoader( this.#kernel ).getConfig();
 
         // Merge the default loader config with the base config
-        this.#config = Object.assign(this.#config, baseConfig);
+        this.#loader = Object.assign(this.#loader, baseConfig);
     }
 
     getConfig()
     {
-        return Object.assign(this.#config, {
+        // Loader object for CleanLoader
+        let loader = {
             name: LOADER_ID,
-            plugins: this.#config.plugins.concat([
+            plugins: this.#loader.plugins.concat([
                 new CleanWebpackPlugin()
             ]),
-        });
+        };
+
+        return Object.assign(this.#loader, loader);
     }
 }
