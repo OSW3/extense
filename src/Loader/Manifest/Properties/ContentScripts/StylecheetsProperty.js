@@ -21,5 +21,24 @@ module.exports = class StylecheetsProperty extends PropertyProvider
         {            
             return {[`${PROPERTY_ID}`]: value};
         }
+
+
+        let styles = [];
+
+        // Background styles definition
+        let items = this.config.content.styles;
+
+        for (const index in items) 
+        {
+            // Single script definition
+            let item = items[ index ];
+
+            // Get the Output filename
+            styles.push(item.output);
+        }
+
+        console.log(styles);
+
+        return {[`${PROPERTY_ID}`]: styles};
     }
 }
