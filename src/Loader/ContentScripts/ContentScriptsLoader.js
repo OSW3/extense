@@ -74,14 +74,14 @@ module.exports = class ContentScriptsLoader
 
         // console.log(items);
 
-        // for (let index in items) 
-        // {
-        //     let loader_id = `${LOADER_ID}.${index}`;
+        for (let index in items) 
+        {
+            let loader_id = `${LOADER_ID}.${index}`;
 
-        //     // Single script definition
-        //     let item = items[ index ];
+            // Single script definition
+            let item = items[ index ];
 
-            let entries = items;
+            let entries = item.input;
 
             if (typeof entries === 'string')
             {
@@ -102,7 +102,7 @@ module.exports = class ContentScriptsLoader
             });
 
             scripts.push(this.render(loader));
-        // }
+        }
 
         return scripts;
     }

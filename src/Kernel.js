@@ -24,7 +24,7 @@ module.exports = class Kernel
         CleanLoader,
         ManifestLoader,
         BackgroundScriptsLoader,
-        // ContentScriptsLoader,
+        ContentScriptsLoader,
     ];
 
     /**
