@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OSW3/extense.git"
+    "url": "git+https://github.com/OSW3/extense-framework-core.git"
   },
   "author": "OSW3",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/OSW3/extense/issues"
+    "url": "https://github.com/OSW3/extense-framework-core/issues"
   },
-  "homepage": "https://github.com/OSW3/extense#readme",
+  "homepage": "https://github.com/OSW3/extense-framework-core",
   "dependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^7.0.0",
